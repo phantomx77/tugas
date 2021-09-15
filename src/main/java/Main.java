@@ -43,6 +43,7 @@ public class Main {
             buyMembership = sheet.getRow(1).getCell(3).getBooleanCellValue();
             isCreditCard = sheet.getRow(1).getCell(4).getBooleanCellValue();
 
+            // read all order from the excel
             for (int i = 1; !finish; i++) {
                 Row row = sheet.getRow(i);
                 row.getCell(1);
@@ -58,10 +59,12 @@ public class Main {
                 }
             }
 
+            // check if they have membership
             if (isMembership) {
                 membershipDiscount = 0.05 * total;
                 total *= 0.95;
             } else if (buyMembership) {
+                // if don't, ask if they want to buy membership
                 // discount then add membership fee
                 membershipDiscount = 0.05 * total;
                 total *= 0.95;
@@ -97,31 +100,6 @@ public class Main {
 
             System.out.printf("Your final total bill is : %.2f$\n", total);
 
-//            //Iterate through each rows one by one
-//            Iterator<Row> rowIterator = sheet.iterator();
-//            while (rowIterator.hasNext()) {
-//                Row row = rowIterator.next();
-//                //For each row, iterate through all the columns
-//                Iterator<Cell> cellIterator = row.cellIterator();
-//
-//                while (cellIterator.hasNext()) {
-//                    Cell cell = cellIterator.next();
-//
-//                    //Check the cell type and format accordingly
-//                    switch (cell.getCellType()) {
-//                        case Cell.CELL_TYPE_NUMERIC:
-//                            if (cell.getStringCellValue() == "item") {
-//
-//                            }
-//                            System.out.print(cell.getNumericCellValue() + "t");
-//                            break;
-//                        case Cell.CELL_TYPE_STRING:
-//                            System.out.print(cell.getStringCellValue() + "t");
-//                            break;
-//                    }
-//                }
-//                System.out.println("");
-//            }
             file.close();
         } catch (Exception e) {
             System.out.println("something is wrong with the application");
