@@ -49,7 +49,10 @@ public class Main {
                 String item = row.getCell(0).getStringCellValue();
                 Double quantity = row.getCell(1).getNumericCellValue();
 
-                total += quantity * vegetableMap.get(item).getPrice();
+                double price = quantity * vegetableMap.get(item).getPrice();
+                System.out.printf("You purchase %s with %.0f quantity for %.2f $. The price is : %.2f$\n", item, quantity, vegetableMap.get(item).getPrice(), price);
+
+                total += price;
                 if (sheet.getLastRowNum() == i) {
                     finish = true;
                 }
@@ -77,7 +80,7 @@ public class Main {
                 total *= 1.02;
             }
 
-            System.out.printf("Your total is : %.2f$\n", total);
+
             if (isMembership) {
                 System.out.printf("You use your membership and get 5%% discount with amount: %.2f$\n", membershipDiscount);
             } else if (buyMembership) {
@@ -91,6 +94,8 @@ public class Main {
             if (isCreditCard) {
                 System.out.printf("You are charged 2%% credit card fee with amount: %.2f$\n", ccCost);
             }
+
+            System.out.printf("Your final total bill is : %.2f$\n", total);
 
 //            //Iterate through each rows one by one
 //            Iterator<Row> rowIterator = sheet.iterator();
